@@ -1,0 +1,49 @@
+You can encounter this kind of error while doing this project  “To authenticate with the Hugging Face Hub, 
+create a token in your settings tab (https://huggingface.co/settings/tokens), set it as secret in your Google Colab and restart your session.”
+Here is the solution for this:
+
+
+Create the Token in Hugging Face:
+Go to Hugging Face Settings.
+Create a new token.
+
+
+Open Google Colab:
+Open a new or existing Colab notebook.
+
+
+Mount Google Drive:
+Run the following code to mount Google Drive:
+from google.colab import drive
+drive.mount('/content/drive')
+
+
+Create the Directory and Token File:
+Run the following code to create the directory and token file:
+!mkdir -p '/content/drive/MyDrive/.huggingface/'
+# Replace 'your_hugging_face_token_here' with the actual token
+echo "huggingface.co:\n  token: your_hugging_face_token_here" > '/content/drive/MyDrive/.huggingface/token.yaml'
+Make sure to replace 'your_hugging_face_token_here' with the actual token.
+
+
+Set the Environment Variable:
+Run the following code to set the environment variable:
+%env HF_HOME=/content/drive/MyDrive/.huggingface
+
+
+Restart the Runtime:
+Go to the "Runtime" menu, select "Restart runtime," and confirm.
+
+
+Reuse the Secret Token:
+In any Colab notebook, you can reuse the secret token by running the following code:
+from google.colab import auth
+auth.authenticate_user()
+%env HF_HOME=/content/drive/MyDrive/.huggingface
+
+Ensure that you have the correct token and that the directory and file are created successfully. 
+If you encounter any issues, double-check the paths and make sure you follow the steps accurately.
+
+
+
+
